@@ -1,0 +1,217 @@
+
+<template>
+  <div class id="app"> 
+    <div class="container">
+    <form @submit.prevent="addTodo(todo)" class="formsBody" >
+      <div class="topForms">
+        <img class="imgTop" src="@/assets/top3.png" alt="">
+        <h1 class="titleForms">Formulário <br> para compra de <br>pacotes de adesivos </h1>
+      </div>
+        
+       <div class="formBodyMain">
+        <h2 class="subTitleForms">Quais adesivos:</h2>
+        <div class="stickerList" >
+           <label for=""><input type="checkbox"> React </label> 
+           <label for="" class="checkboxVue"><input type="checkbox"> Vue </label>
+           <label for=""><input type="checkbox"> Angular </label>     
+        </div>
+        
+        <h2 class="subTitleForms">Quantos adesivos de cada?</h2>
+        <div class="quantityStickers">
+          <button class="buttonDecrease"> - </button>
+          <input class="inputAmount" type="number">
+           <button class="buttonIncrease"> + </button>
+        </div>
+       
+        <h2 class="subTitleForms">Observações:</h2>
+        <div class="input-group">
+          <input
+           type="text" 
+           v-model="todo.description" 
+           class="form-input" 
+           placeholder="Alguma dúvida? Recado?"
+          >
+          <div class="doubtMessage">
+            <div v-for="t in todos" :key="t.id">
+              {{t.description}}
+            </div>
+          </div>
+       </div>
+      </div>
+       <div class="footer">
+          <button class="button">Enviar</button>
+       </div>
+      {{todo}}
+     </form>     
+    </div>
+  </div>
+</template>
+
+
+<script>
+  export default {
+    name: "app",
+    data(){
+      return{todos:[], todo: {checked:false}};
+    },
+
+    methods:{
+      addTodo(todo) {
+      todo.id = Date.now()
+      this.todos.push(todo)
+      this.todo = {checked:false}
+    }
+    }
+  };
+
+</script>
+
+<style>
+@import "@/assets/base.css";
+
+#app{
+  width:55%;
+  height: 400px;
+  margin: 0 auto;
+  margin-left: auto;
+  padding-top: 10px;
+  border-radius: 20px;
+
+}
+
+.imgTop{
+  width: 100%;
+  height: 150px;
+}
+.img-logo{
+  max-width: 20px;
+  margin:0 auto;
+  margin-top:10px;
+}
+
+
+body{
+  background-color: #8A2BE2;
+}
+.topSvg{
+  height: 150px;
+}
+.topForms{
+  height: 100px;
+  border-radius: 45px 45px 10px 220px;
+}
+.formsBody{
+  display:auto;
+  background-color:#ffffff;
+  box-shadow:5px 10px 18px #000000;
+
+}
+.titleForms{
+  margin-left: 20px;
+  color:#ffffff;
+  display:flex;
+  font-size:16px;
+  bottom:125px;
+
+}
+
+.formBodyMain{
+  padding: 50px;
+}
+
+.stickerList{
+  display:flex;
+  flex-direction: column;
+}
+
+.checkboxVue{
+  margin-top: 10px;
+}
+.quantityStickers{
+  display: flex;
+  flex-direction: columns;
+  margin-bottom: 10px;
+}
+
+.buttonDecrease{
+  border: none;
+  background-color:#2F3676;
+  color: #ffffff;
+  font-size: 14px;
+  border-radius: 5px;
+  font-size: 25px;
+  width: 15%;
+}
+
+.inputAmount{
+  width: 15%;
+  margin-left: 5px;
+  margin-right: 5px;
+  border:none;
+  border: solid 1px #8B91B2;
+  border-radius: 5px;
+  margin-top: 10px;
+}
+
+.buttonIncrease{
+  border: none;
+  background-color:#2F3676;
+  color: #ffffff;
+  border-radius: 5px;
+  font-size: 25px;
+  width: 15%;
+}
+
+h2{
+  color:#000000;
+  display:flex;
+  font-size:18px;
+  font-weight: 800;
+}
+
+.form-input{
+  border-radius:05px;
+}
+
+.form-input{
+  padding-bottom: 50px;
+  padding-left: 10px;
+  font-size: 12px;
+  background-color:#DCE3E9;
+  height: 90px;
+  width: 100%;
+  border: solid 1px #8B91B2;
+}
+
+.doubtMessage{
+  padding-bottom: 50px;
+  padding-left: 10px;
+  font-size: 12px;
+  background-color:#DCE3E9;
+  height: 90px;
+  width: 100%;
+  border: solid 1px #8B91B2;
+}
+.footer{
+  display: flex;
+  align-items: center;
+  align-content: flex-end;
+  width: 100%;
+  height: 80px;
+
+  background-color:#DCE3E9;
+}
+.button{
+  background-color: #2F3676;
+  margin-left: 270px;
+  border:none;
+  border-radius: 5px;
+  width: 90px;
+  height: 30px;
+  font-size: 18px;
+  font-weight: 700;
+  color: #ffffff;
+  cursor: pointer;
+}
+
+</style>
