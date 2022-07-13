@@ -2,49 +2,57 @@
 <template>
   <div class id="app"> 
     <div class="container">
-    <form @submit.prevent="addTodo(todo)" class="formsBody" >
-      <div class="topForms">
-        <img class="imgTop" src="@/assets/top3.png" alt="">
-        <h1 class="titleForms">Formulário <br> para compra de <br>pacotes de adesivos </h1>
-      </div>
-        
-       <div class="formBodyMain">
-        <h2 class="subTitleForms">Quais adesivos:</h2>
-        <div class="stickerList" >
-           <label for=""><input type="checkbox"> React </label> 
-           <label for="" class="checkboxVue"><input type="checkbox"> Vue </label>
-           <label for=""><input type="checkbox"> Angular </label>     
+    <form @submit.prevent="addTodo(todo)" class="formsBody">
+      <div v-if="newScreen ===false">
+        <div class="topForms">
+          <img class="imgTop" src="@/assets/top3.png" alt="">
+          <h1 class="titleForms">Formulário <br> para compra de <br>pacotes de adesivos </h1>
         </div>
-        
-        <h2 class="subTitleForms">Quantos adesivos de cada?</h2>
-        <div class="quantityStickers">
-          <button class="buttonDecrease"> - </button>
-          <input class="inputAmount" type="number">
-           <button class="buttonIncrease"> + </button>
-        </div>
-       
-        <h2 class="subTitleForms">Observações:</h2>
-        <div class="input-group">
-          <input
-           type="text" 
-           v-model="todo.description" 
-           class="form-input" 
-           placeholder="Alguma dúvida? Recado?"
-          >
-          <div class="doubtMessage">
-            <div v-for="t in todos" :key="t.id">
-              {{t.description}}
-            </div>
+          
+        <div class="formBodyMain">
+          <h2 class="subTitleForms">Quais adesivos:</h2>
+           <div class="stickerList">
+            <label for="" v-on:click="checkboxReact = !checkboxReact"><input type="checkbox"> React </label> 
+            <label for="" v-on:click="checkboxVue = !checkboxVue" class="checkboxVue"><input type="checkbox"> Vue </label>
+            <label for="" v-on:click="checkboxAngular= !checkboxAngular"><input type="checkbox"> Angular </label>     
+           </div>
+          
+          
+          <h2 class="subTitleForms">Quantos adesivos de cada?</h2>
+          <div class="quantityStickers">
+            <button class="buttonDecrease"> - </button>
+            <input class="inputAmount" type="number">
+            <button class="buttonIncrease"> + </button>
           </div>
-       </div>
+        
+          <h2 class="subTitleForms">Observações:</h2>
+          <div class="input-group">
+            <input
+            type="text" 
+            v-model="todo.description" 
+            class="form-input" 
+            placeholder="Alguma dúvida? Recado?"
+            >
+        </div>
+        </div>
+        <div class="footer">
+            <button class="button" v-on:click="newScreen = true">Enviar</button>
+        </div>
       </div>
-       <div class="footer">
-          <button class="button">Enviar</button>
-       </div>
-       <div @submit="finishForm(newScreen)" class="finish">
-          <button class="buttonFinish">Finalizar</button>
-       </div>
-     
+          <div v-else>
+             <div class="doubtMessage">
+              <p>Lista de items no carrinho</p>
+              <ul>
+                <li v-if="checkoutReact===true">React</li>
+                <li v-if="checkoutVue ===true">Vue</li>
+                <li v-if="checkoutAngular===true">Angular</li>
+              </ul>
+              <div v-for="t in todos" :key="t.id">
+               {{t.description}}
+              </div>
+            </div>
+            {{todo.description}}  
+          </div>   
      </form>     
     </div>
   </div>
@@ -55,7 +63,8 @@
   export default {
     name: "app",
     data(){
-      return{todos:[], todo: {checked:false}, newScreen:false;
+      return{todos:[],newScreen:false, todo: {checked:false}, checkboxReact:false,
+       checkboxVue:false, checkboxAngular:false};
     },
 
     methods:{
@@ -65,8 +74,24 @@
       this.todo = {checked:false}
     },
       finishForm(newScreen){
-        this.newScreen = {true:true}
+        this.newScreen = true;
+      },
+    
+      viewReact(checkboxReact){
+        this.checkboxReact =true;
+      },
+
+      viewVue(checkboxVue){
+        this.checkboxVue =true;
+      },
+
+      viewAngular(checkboxAngular){
+        this.checkboxAngular=true;
       }
+
+      // incrementButton(increment){
+      //   this.increment =
+      // }
     }
   };
 
@@ -189,15 +214,6 @@ h2{
   border: solid 1px #8B91B2;
 }
 
-.doubtMessage{
-  padding-bottom: 50px;
-  padding-left: 10px;
-  font-size: 12px;
-  background-color:#DCE3E9;
-  height: 90px;
-  width: 100%;
-  border: solid 1px #8B91B2;
-}
 .footer{
   display: flex;
   align-items: center;
