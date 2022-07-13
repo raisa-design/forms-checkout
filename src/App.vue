@@ -20,9 +20,9 @@
           
           <h2 class="subTitleForms">Quantos adesivos de cada?</h2>
           <div class="quantityStickers">
-            <button class="buttonDecrease"> - </button>
-            <input class="inputAmount" type="number">
-            <button class="buttonIncrease"> + </button>
+            <button class="buttonDecrease" v-on:click="qtde = qtde -1 "> - </button>
+            <input class="inputAmount" type="number" v-model="qtde">
+            <button class="buttonIncrease" v-on:click="qtde =qtde +1"> + </button>
           </div>
         
           <h2 class="subTitleForms">Observações:</h2>
@@ -43,15 +43,34 @@
              <div class="doubtMessage">
               <p>Lista de items no carrinho</p>
               <ul>
-                <li v-if="checkoutReact===true">React</li>
-                <li v-if="checkoutVue ===true">Vue</li>
-                <li v-if="checkoutAngular===true">Angular</li>
+                <li v-if="checkboxReact===true">React</li>
+                <li v-if="checkboxVue ===true">Vue</li>
+                <li v-if="checkboxAngular===true">Angular</li>
               </ul>
               <div v-for="t in todos" :key="t.id">
                {{t.description}}
               </div>
             </div>
             {{todo.description}}  
+            <div>
+            <h1>Formas de pagamento:</h1>
+            <div class="formOfPaymentCard">
+              <img
+              class="cardPayment" 
+              src="@/assets/cartao.png"
+              alt="Imagem de um cartão de créditocom a cor principal azul claro e ícones amarelo e laranja "
+              > 
+              <p>Cartão de crédito</p>
+            </div>
+             <div class="formOfPaymentCard">
+              <img 
+              class="pixPayment"
+              src="@/assets/pix.png"
+              alt="Imagem do nome Pix na cor cinza e ícone verde claro"
+              > 
+              <p>Pix</p>
+            </div>
+          </div>
           </div>   
      </form>     
     </div>
@@ -64,7 +83,7 @@
     name: "app",
     data(){
       return{todos:[],newScreen:false, todo: {checked:false}, checkboxReact:false,
-       checkboxVue:false, checkboxAngular:false};
+       checkboxVue:false, checkboxAngular:false, qtde:1};
     },
 
     methods:{
@@ -88,10 +107,6 @@
       viewAngular(checkboxAngular){
         this.checkboxAngular=true;
       }
-
-      // incrementButton(increment){
-      //   this.increment =
-      // }
     }
   };
 
@@ -236,4 +251,20 @@ h2{
   cursor: pointer;
 }
 
+.formOfPaymentCard{
+  display:flex;
+}
+.cardPayment{
+  top: 2px;
+  height: 20px;
+  width: 30px;
+  margin-left:20px;
+}
+
+.pixPayment{
+  top: 2px;
+  height: 20px;
+  width: 30px;
+  margin-left:25px;
+}
 </style>
