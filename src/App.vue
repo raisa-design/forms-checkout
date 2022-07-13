@@ -373,4 +373,24 @@ h2{
     font-size: 12px;
   }
 }
+@media (max-width: 500px){
+  #app{
+     width:90%;
+  }
+}
+
+@media (max-width: 330px){
+  .form-input{
+    font-size: 10px;
+  }
+  .buttonFinishing{
+    font-size: 10px;
+  }
+  .buttonIncrease{
+    font-size:16px;
+  }
+  .buttonDecrease{
+    font-size:16px;
+  }
+}
 </style>
