@@ -41,7 +41,10 @@
        <div class="footer">
           <button class="button">Enviar</button>
        </div>
-      {{todo}}
+       <div @submit="finishForm(newScreen)" class="finish">
+          <button class="buttonFinish">Finalizar</button>
+       </div>
+     
      </form>     
     </div>
   </div>
@@ -52,7 +55,7 @@
   export default {
     name: "app",
     data(){
-      return{todos:[], todo: {checked:false}};
+      return{todos:[], todo: {checked:false}, newScreen:false;
     },
 
     methods:{
@@ -60,7 +63,10 @@
       todo.id = Date.now()
       this.todos.push(todo)
       this.todo = {checked:false}
-    }
+    },
+      finishForm(newScreen){
+        this.newScreen = {true:true}
+      }
     }
   };
 
