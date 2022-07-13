@@ -6,7 +6,7 @@
       <div v-if="newScreen ===false">
         <div class="topForms">
           <img class="imgTop" src="@/assets/top3.png" alt="">
-          <h1 class="titleForms">Formulário <br> para compra de <br>pacotes de adesivos </h1>
+          <h1 class="titleForms">Formulário <br> para compra de <br> <h1></h1>  Pacotes de adesivos </h1>
         </div>
           
         <div class="formBodyMain">
@@ -21,7 +21,7 @@
           <h2 class="subTitleForms">Quantos adesivos de cada?</h2>
           <div class="quantityStickers">
             <button class="buttonDecrease" v-on:click="qtde = qtde -1 "> - </button>
-            <input v-on:click="amoutAdhesive= !amoutAdhesive" class="inputAmount" type="number" v-model="qtde">
+            <input class="inputAmount" type="number" v-model="qtde">
             <button class="buttonIncrease" v-on:click="qtde =qtde +1"> + </button>
           </div>
         
@@ -36,75 +36,61 @@
         </div>
         </div>
         <div class="footer">
-            <button class="button" v-on:click="newScreen = true">Enviar</button>
+            <button 
+             class="buttonSubmit" 
+             v-on:click="newScreen = true">Enviar</button>
         </div>
       </div>
           <div v-else>
              <div class="doubtMessage">
               <h1 class="titleCart">Lista de itens no carrinho</h1>
               <ul>
-                <li v-if="checkboxReact===true">React</li>
-                <li v-if="checkboxVue ===true">Vue</li>
-                <li v-if="checkboxAngular===true">Angular</li>
+                <li v-if="checkboxReact===true">{{qtde}} Undidades React</li>
+                <li v-if="checkboxVue ===true">{{qtde}} Undidades Vue</li>
+                <li v-if="checkboxAngular===true">{{qtde}} Undidades Angular</li>
               </ul>
-              <ul>
-                <li v-if="amoutAdhesive===true">Unidades</li>
-              </ul>
-              <div class="messageCustomer" v-for="t in todos" :key="t.id">
+              <div class="messageCustomer" v-for="t in todos" :key="t.id"
+               >
                {{t.description}}
               </div>
             </div>
             {{todo.description}}  
             <div>
               <h1 class="titlePayment">Formas de pagamento:</h1>
-              <div class="formOfPaymentCard">
-                <input 
-                  name="payment"
-                  class="inputCard" 
-                  type="radio"
-                >
-              <img
-              class="cardPayment"
-              src="@/assets/cartao.png"
-              alt="Imagem de um cartão de créditocom a cor principal azul claro e ícones amarelo e laranja "
+              <div v-if="paymentScreen ===false">
+                 <div class="formOfPaymentCard">
+                <input  name="payment" class="inputCard" type="radio" v-on:click="paymentScreen = true">
+              <img  class="cardPayment" src="@/assets/cartao.png"  alt="Imagem de um cartão de crédito com a cor principal azul claro e ícones amarelo e laranja "
               > 
               <p>Cartão de crédito</p>
             </div>
-            <div class="dataCard">
-              <p>Número do cartão</p>
-              <input type="number">
-              <p>Nome completo</p>
-              <input type="text">
-              <p>Validade</p>
-              <input type="number">
-              <p>Código de segurança</p>
-              <input type="number">
-              <label for=""><input type="checkbox">Salvar o cartão</label>
-              
+              </div>      
+            <div v-else>
+             <div class="dataCard">
+                <p>Número do cartão</p>
+                <input type="number">
+                <p>Nome completo</p>
+                <input type="text">
+                <p>Validade</p>
+                <input type="number">
+                <p>Código de segurança</p>
+                <input type="number">
+                <label for=""><input type="checkbox">Salvar o cartão</label>
+              </div>
             </div>
+           
+            
             <div class="formOfPaymentPix">
-               <input 
-               name="payment"
-               class="inputPix" 
-               type="radio"
+               <input name="payment" class="inputPix" type="radio"
                >
-              <img 
-              class="pixPayment"
-              src="@/assets/pix.png"
-              alt="Imagem do nome Pix na cor cinza e ícone verde claro"
+              <img class="pixPayment" src="@/assets/pix.png" alt="Imagem do nome Pix na cor cinza e ícone verde claro"
               > 
               <p>Pix</p>
             </div>
             <div class="formOfPaymentTicket">
-               <input
-              name="payment"
-              class="inputTicket"
-              type="radio"
+               <input  name="payment" class="inputTicket" type="radio"
               >
-              <img 
-              class="ticketPayment"
-              src="@/assets/boleto.png"
-              alt="Imagem do nome Pix na cor cinza e ícone verde claro"
+              <img  class="ticketPayment" src="@/assets/boleto.png" alt="Imagem do nome Pix na cor cinza e ícone verde claro"
               > 
               <p>Boleto</p>
             </div>
@@ -125,7 +111,7 @@
     name: "app",
     data(){
       return{todos:[],newScreen:false, todo: {checked:false}, checkboxReact:false,
-       checkboxVue:false, checkboxAngular:false, qtde:1, amoutAdhesive:false };
+       checkboxVue:false, checkboxAngular:false, qtde:1, paymentScreen:false };
     },
 
     methods:{
@@ -149,9 +135,11 @@
       viewAngular(checkboxAngular){
         this.checkboxAngular=true;
       },
-      viewAmount(amoutAdhesive){
-        this.amoutAdhesive=true;
+
+      viewPayment(paymentScreen){
+        this.paymentScreen=true;
       }
+      
     }
   };
 
@@ -265,6 +253,7 @@ h2{
 }
 .footer{
   display: flex;
+  justify-content: flex-end;
   align-items: center;
   align-content: flex-end;
   width: 100%;
@@ -273,12 +262,15 @@ h2{
   border-bottom-left-radius: 20px;
   border-bottom-right-radius: 20px;
 }
-.button{
+.buttonSubmit{
   background-color: #2F3676;
   margin-left: 270px;
   border:none;
   border-radius: 5px;
-  width: 90px;
+  width: 25%;
+  padding:5px;
+  margin-right: 20px;
+  bottom:10px;
   height: 30px;
   font-size: 18px;
   font-weight: 700;
@@ -373,4 +365,12 @@ h2{
   justify-content: flex-end;
 }
 
+@media (max-width: 800px){
+  #app{
+  width:70%;
+}
+  .buttonSubmit{
+    font-size: 12px;
+  }
+}
 </style>
