@@ -6,7 +6,7 @@
       <div v-if="newScreen ===false">
         <div class="topForms">
           <img class="imgTop" src="@/assets/top3.png" alt="">
-          <h1 class="titleForms">Formulário <br> para compra de <br> <h1></h1>  Pacotes de adesivos </h1>
+          <h1 class="titleForms">Formulário <br> para compra de <br>   Pacotes de adesivos </h1>
         </div>
           
         <div class="formBodyMain">
@@ -45,9 +45,9 @@
              <div class="doubtMessage">
               <h1 class="titleCart">Lista de itens no carrinho</h1>
               <ul>
-                <li v-if="checkboxReact===true">{{qtde}} Undidades React</li>
-                <li v-if="checkboxVue ===true">{{qtde}} Undidades Vue</li>
-                <li v-if="checkboxAngular===true">{{qtde}} Undidades Angular</li>
+                <li v-if="checkboxReact===true">{{qtde}} Unidades React</li>
+                <li v-if="checkboxVue ===true">{{qtde}} Unidades Vue</li>
+                <li v-if="checkboxAngular===true">{{qtde}} Unidades Angular</li>
               </ul>
               <div class="messageCustomer" v-for="t in todos" :key="t.id"
                >
